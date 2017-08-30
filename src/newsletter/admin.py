@@ -1,7 +1,16 @@
 from django.contrib import admin
 
-from newsletter.models import SignUp
+from .forms import SignUpForm
+from .models import SignUp
 
 # Register your models here.
 
-admin.site.register(SignUp)
+
+class SignUpAdmin(admin.ModelAdmin):
+    # class Meta:
+    #   model = SignUp
+    form = SignUpForm
+    list_display = ["__unicode__", "timestamp", "updated"]
+    ordering = ['-timestamp']
+
+admin.site.register(SignUp, SignUpAdmin)
