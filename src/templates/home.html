@@ -3,5 +3,25 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-    <h1>Home</h1>
+    <style>
+        .col-sm-2 {
+            border: 1px solid silver;
+        }
+    </style>
+    <h1>Current Subscribers</h1>
+    <div class="row">
+        {% for receiver in receivers %}
+            <div class="col-sm-2">
+                <ul>
+                    <li>{{ receiver.full_name }}</li>
+                    <li>{{ receiver.email }}</li>
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+    <h3>{{ signup_title }}</h3>
+    <form method="POST"> {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Sign Up">
+    </form>
 {% endblock content %}
