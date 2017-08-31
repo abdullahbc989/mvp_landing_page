@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render
 
 from .forms import SignUpForm, ContactForm
@@ -33,8 +34,19 @@ def contact(request):
     contact_title = "Contact Us Here"
 
     if form.is_valid():
-        instance = form.save(commit=False)
-        instance.save()
+        form_subject = form.cleaned_data.get('subject')
+        email = form.cleaned_data.get('email')
+        form_message = form.cleaned_data.get('message')
+        full_name = form.cleaned_data.get('full_name')
+
+        sender = settings.EMAIL_HOST_USER
+
+        send_mail(subject=form_subject,
+                  message=form_message,
+                  from_email=sender,
+                  recipient_list=[sender],
+                  fail_silently=False)
+
         contact_title = "Sent!"
 
         """
