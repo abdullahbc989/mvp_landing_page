@@ -13,6 +13,7 @@
         <title>{%block title %}{% endblock title %}</title>
     </head>
     <body>
+        {% include 'snippets/nav.html' %}
         {% block content %}
         {% endblock content %}
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"

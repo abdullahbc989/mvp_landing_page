@@ -1,7 +1,12 @@
 from django import forms
 from django.forms import ValidationError
-from django.http import HttpResponse
 from .models import SignUp
+
+
+class ContactForm(forms.Form):
+    full_name = forms.CharField(max_length=120)
+    email = forms.EmailField()
+    message = forms.CharField(max_length=200)
 
 
 class SignUpForm(forms.ModelForm):

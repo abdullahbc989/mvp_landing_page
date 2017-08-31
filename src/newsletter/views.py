@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import SignUpForm
+from .forms import SignUpForm, ContactForm
 from .models import SignUp
 
 
@@ -25,4 +25,28 @@ def home(request):
         "signup_title": signup_title,
     }
     template = "home.html"
+    return render(request, template, context)
+
+
+def contact(request):
+    form = ContactForm(request.POST or None)
+    contact_title = "Contact Us Here"
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        contact_title = "Sent!"
+
+        """
+        for key, value in form.cleaned_data.iteritems():
+            print key, value
+            # print form.cleaned_data.get(key)
+        """
+
+    context = {
+        "contact_title": contact_title,
+        "form": form,
+    }
+    template = "contact.html"
+
     return render(request, template, context)
