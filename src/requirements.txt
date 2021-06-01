@@ -54,5 +54,5 @@ sig-auth-django==1.2.0
 simplejson==3.10.0
 six==1.10.0
 suds==0.4
-urllib3==1.22
+urllib3==1.26.5
 wrapt==1.10.10
